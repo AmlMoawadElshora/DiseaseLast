@@ -6,4 +6,4 @@ tensorflow
 Pillow
 opencv-python
 keras
-tensorflow-gpu
+tensorflow-gpu=2.12.0
