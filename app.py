@@ -16,8 +16,12 @@ model = load_model(r'disease.h5')
 
 print('Model loaded. Check http://127.0.0.1:5000/')
 
-
 labels = {0: 'Healthy', 1: 'Powdery', 2: 'Rust'}
+
+# Ensure the 'uploads' directory exists
+uploads_dir = os.path.join(os.getcwd(), 'uploads')
+if not os.path.exists(uploads_dir):
+    os.makedirs(uploads_dir)
 
 def getResult(image_path):
     img = load_img(image_path, target_size=(225, 225))
@@ -36,8 +40,11 @@ def upload():
     if request.method == 'POST':
         f = request.files['file']
 
-        basepath = os.path.dirname(__file__)
-        file_path = os.path.join(basepath, 'uploads', secure_filename(f.filename))
+        # Ensure the 'uploads' directory exists
+        if not os.path.exists(uploads_dir):
+            os.makedirs(uploads_dir)
+
+        file_path = os.path.join(uploads_dir, secure_filename(f.filename))
         f.save(file_path)
         predictions = getResult(file_path)
         predicted_label = labels[np.argmax(predictions)]
