@@ -12,7 +12,16 @@ import requests
 
 app = Flask(__name__)
 
-model = load_model(r'disease.h5')
+model_path = os.path.join(os.getcwd(), 'disease.h5')
+
+if not os.path.exists(model_path):
+    model_url = "https://github.com/AmlMoawadElshora/DiseaseLast/raw/main/disease.h5?download="
+    response = requests.get(model_url)
+    with open(model_path, 'wb') as f:
+        f.write(response.content)
+
+# Load the model
+model = load_model(model_path)
 
 print('Model loaded. Check http://127.0.0.1:5000/')
 
@@ -53,3 +62,4 @@ def upload():
 
 if __name__ == '__main__':
     app.run(debug=True)
+
