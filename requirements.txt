@@ -1,0 +1,8 @@
+gunicorn
+Flask
+requests
+numpy
+tensorflow
+Pillow
+opencv-python
+keras
