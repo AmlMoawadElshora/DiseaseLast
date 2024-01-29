@@ -12,18 +12,10 @@ import requests
 
 app = Flask(__name__)
 
-model_url = "https://github.com/AmlMoawadElshora/DiseaseLast/raw/main/disease.h5?download="
-model_path = os.path.join(os.getcwd(), 'disease.h5')
-
-# Download the model from GitHub
-response = requests.get(model_url)
-with open(model_path, 'wb') as f:
-    f.write(response.content)
-
-# Load the model
-model = load_model(model_path)
+model = load_model(r'disease.h5')
 
 print('Model loaded. Check http://127.0.0.1:5000/')
+
 
 labels = {0: 'Healthy', 1: 'Powdery', 2: 'Rust'}
 
