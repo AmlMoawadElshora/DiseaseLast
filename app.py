@@ -12,7 +12,7 @@ import requests
 
 app = Flask(__name__)
 
-model_path = os.path.join(os.getcwd(), 'disease.h5')
+model_path = os.path.join(os.getcwd(), r'disease.h5')
 
 if not os.path.exists(model_path):
     model_url = "https://github.com/AmlMoawadElshora/DiseaseLast/raw/main/disease.h5?download="
